@@ -188,6 +188,106 @@
 
     // Cargar los datos al iniciar la página
     loadPrices();
+    // --- CONFIGURACIÓN ---
+const PRICES_JSON_URL = 'prices.json';
+
+// --- ALIAS PARA NORMALIZAR BÚSQUEDAS ---
+const ALIAS_MAP = {
+  'redmi': 'xiaomi',
+  'galaxy': 'samsung',
+  'moto': 'motorola',
+  'huawei': 'huawei', // ya está
+  'honor': 'honor',
+  'xiaomi': 'xiaomi',
+  'samsung': 'samsung',
+  'motorola': 'motorola'
+};
+
+// --- ELEMENTOS DOM ---
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const resultsContainer = document.getElementById('results');
+
+let pricesData = [];
+
+// --- NORMALIZAR CONSULTA ---
+function normalizeQuery(query) {
+  let q = query.toLowerCase().trim();
+  // Reemplazar alias por marca oficial
+  const words = q.split(/\s+/);
+  if (words.length > 0) {
+    const firstWord = words[0];
+    if (ALIAS_MAP[firstWord]) {
+      words[0] = ALIAS_MAP[firstWord];
+      q = words.join(' ');
+    }
+  }
+  return q;
+}
+
+// --- CARGAR DATOS ---
+async function loadPrices() {
+  try {
+    const url = PRICES_JSON_URL + '?t=' + new Date().getTime();
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('No se pudo cargar la lista de precios.');
+    pricesData = await response.json();
+    // Agregar campo 'searchable' a cada item (marca + modelo en minúsculas)
+    pricesData = pricesData.map(item => ({
+      ...item,
+      searchable: (item.marca + ' ' + item.modelo).toLowerCase()
+    }));
+    resultsContainer.innerHTML = `<p class="helper">✅ Listo. Busca el modelo de tu celular.</p>`;
+  } catch (error) {
+    console.error('Error al cargar precios:', error);
+    resultsContainer.innerHTML = `<p class="helper" style="color: #ff1744;">❌ Error al cargar los precios. Intenta de nuevo más tarde.</p>`;
+  }
+}
+
+// --- BÚSQUEDA ---
+function performSearch() {
+  const query = searchInput.value.trim();
+  if (!query) {
+    resultsContainer.innerHTML = `<p class="helper">🔍 Escribe un modelo para comenzar la búsqueda.</p>`;
+    return;
+  }
+
+  const normalizedQuery = normalizeQuery(query);
+
+  // Filtrar: buscar en el campo 'searchable'
+  const results = pricesData.filter(item =>
+    item.searchable.includes(normalizedQuery)
+  );
+
+  if (results.length === 0) {
+    resultsContainer.innerHTML = `<div class="no-results">😕 No encontramos pantallas para "<strong>${searchInput.value}</strong>". Prueba con otro modelo.</div>`;
+    return;
+  }
+
+  let html = '';
+  results.forEach(item => {
+    html += `
+      <div class="result-item">
+        <div class="info">
+          <span class="modelo">${item.marca} ${item.modelo}</span>
+          <span class="calidad">Calidad: ${item.calidad}</span>
+        </div>
+        <span class="precio">₡${item.precio.toLocaleString('es-CR')}</span>
+      </div>
+    `;
+  });
+
+  resultsContainer.innerHTML = html;
+}
+
+// --- EVENTOS ---
+searchBtn.addEventListener('click', performSearch);
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') performSearch();
+});
+
+// Carga inicial
+loadPrices();
   </script>
 </body>
 </html>

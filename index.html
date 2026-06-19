@@ -103,7 +103,7 @@
     <p class="subtitle">Ingresa el modelo de tu celular para conocer el precio de su pantalla.</p>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ej: Samsung S24, iPhone 15, Xiaomi..." />
+      <input type="text" id="searchInput" placeholder="Ej: Samsung A12, Moto G20, Xiaomi 13C..." />
       <button id="searchBtn">Buscar</button>
     </div>
 
@@ -172,7 +172,7 @@
               <span class="modelo">${item.marca} ${item.modelo}</span>
               <span class="calidad">Calidad: ${item.calidad}</span>
             </div>
-            <span class="precio">$${item.precio.toLocaleString('es-CR')}</span>
+            <span class="precio">₡${item.precio.toLocaleString('es-CR')}</span>
           </div>
         `;
       });

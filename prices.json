@@ -1,0 +1,6 @@
+{
+  "marca": "Nombre de la marca (ej. Samsung, iPhone, Xiaomi)",
+  "modelo": "Nombre exacto del modelo (ej. Galaxy S24 Ultra, 15 Pro Max)",
+  "calidad": "Tipo de pantalla (ej. Original, Genérica, Alta Calidad)",
+  "precio": 150000  // Precio en tu moneda local (sin comas ni puntos, solo números)
+}

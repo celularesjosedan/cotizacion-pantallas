@@ -54,6 +54,8 @@
   {"marca":"Samsung","modelo":"A56","calidad":"OLED","precio":50000},
   {"marca":"Samsung","modelo":"A55","calidad":"OLED","precio":50000},
   {"marca":"Samsung","modelo":"A36","calidad":"OLED","precio":50000},
+  {"marca":"Samsung","modelo":"a30s","calidad":"OLED","precio":30000},
+  {"marca":"Samsung","modelo":"a70","calidad":"OLED","precio":45000},
   {"marca":"Huawei","modelo":"p40 lite","calidad":"LCD","precio":22000},
   {"marca":"Huawei","modelo":"y8s","calidad":"LCD","precio":22000},
   {"marca":"Huawei","modelo":"y9 prime","calidad":"LCD","precio":22000},
@@ -138,5 +140,10 @@
   {"marca":"Redmi","modelo":"note 13","calidad":"OLED","precio":35000},
   {"marca":"Redmi","modelo":"note 10 pro","calidad":"OLED","precio":35000},
   {"marca":"Redmi","modelo":"note 14 4g","calidad":"OLED","precio":45000},
+  {"marca":"Poco","modelo":"x4 pro","calidad":"OLED","precio":45000},
+  {"marca":"Poco","modelo":"m4 pro","calidad":"OLED","precio":35000},
+  {"marca":"Poco","modelo":"x5 pro","calidad":"OLED","precio":45000},
+  {"marca":"Poco","modelo":"x5","calidad":"OLED","precio":35000},
+  
   {"marca":"Redmi","modelo":"note 12 4g","calidad":"OLED","precio":45000}
 ]

@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Cotización de Pantallas - CELULARES JOSEDAN</title>
+  <meta name="description" content="Consulta el precio de la pantalla de tu celular por modelo." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* --- ESTILOS (Puedes copiar los mismos de tu otra página para mantener la unidad) --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
@@ -18,18 +18,29 @@
       font-family: 'Inter', system-ui, sans-serif;
       background: #14181c;
       padding: 16px;
+      margin: 0;
     }
     .card {
       background: rgba(24, 30, 36, 0.9);
-      border: 1px solid rgba(0, 229, 255, 0.2);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(0, 229, 255, 0.20);
       border-radius: 28px;
       padding: 30px;
       max-width: 800px;
       width: 100%;
       box-shadow: 0 20px 50px rgba(0,0,0,0.7);
     }
-    h1 { color: #e8f0f8; margin-bottom: 8px; }
-    .subtitle { color: #8a9aa8; margin-bottom: 24px; }
+    .card h1 {
+      color: #e8f0f8;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: #8a9aa8;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
     .search-box {
       display: flex;
       gap: 12px;
@@ -46,10 +57,14 @@
       color: #e8f0f8;
       font-size: 1rem;
       outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .search-box input:focus {
       border-color: #00e5ff;
       box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.15);
+    }
+    .search-box input::placeholder {
+      color: #6a7a88;
     }
     .search-box button {
       min-height: 54px;
@@ -61,13 +76,21 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      transition: transform 0.1s ease;
+      transition: transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
     }
-    .search-box button:hover { transform: scale(1.02); }
+    .search-box button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+    }
+    .search-box button:active {
+      transform: scale(0.97);
+    }
     .results-container {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-height: 100px;
     }
     .result-item {
       background: rgba(32, 40, 48, 0.4);
@@ -80,20 +103,61 @@
       flex-wrap: wrap;
       animation: fadeSlideUp 0.3s ease forwards;
     }
-    .result-item .info { display: flex; flex-direction: column; }
-    .result-item .modelo { color: #e8f0f8; font-weight: 600; font-size: 1.1rem; }
-    .result-item .calidad { color: #8a9aa8; font-size: 0.9rem; }
-    .result-item .precio { color: #00e5ff; font-weight: 800; font-size: 1.3rem; }
-    .no-results { color: #8a9aa8; text-align: center; padding: 30px 0; }
+    .result-item .info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .result-item .modelo {
+      color: #e8f0f8;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .result-item .calidad {
+      color: #8a9aa8;
+      font-size: 0.9rem;
+    }
+    .result-item .precio {
+      color: #00e5ff;
+      font-weight: 800;
+      font-size: 1.3rem;
+      background: rgba(0, 229, 255, 0.08);
+      padding: 6px 14px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+    }
+    .no-results {
+      color: #8a9aa8;
+      text-align: center;
+      padding: 30px 0;
+      font-size: 1.05rem;
+    }
+    .no-results strong {
+      color: #e8f0f8;
+    }
+    .helper {
+      color: #6a7a88;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .helper .emoji {
+      margin-right: 6px;
+    }
     @keyframes fadeSlideUp {
-      0% { opacity: 0; transform: translateY(10px); }
+      0% { opacity: 0; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-    .helper { color: #6a7a88; margin-top: 12px; font-size: 0.9rem; }
     @media (max-width: 600px) {
       .card { padding: 20px; }
       .search-box input, .search-box button { width: 100%; }
-      .result-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .result-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .result-item .precio { align-self: flex-start; }
+    }
+    @media (max-width: 400px) {
+      .card { padding: 16px; }
+      .search-box input { padding: 12px 14px; min-height: 46px; }
+      .search-box button { min-height: 46px; }
     }
   </style>
 </head>
@@ -103,67 +167,103 @@
     <p class="subtitle">Ingresa el modelo de tu celular para conocer el precio de su pantalla.</p>
 
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ej: Samsung A12, Moto G20, Xiaomi 13C..." />
+      <input type="text" id="searchInput" placeholder="Ej: Samsung A12, Redmi 13c, Moto G60..." autocomplete="off" />
       <button id="searchBtn">Buscar</button>
     </div>
 
     <div id="results" class="results-container">
-      <!-- Aquí se mostrarán los resultados -->
-      <p class="helper">🔍 Escribe un modelo para comenzar la búsqueda.</p>
+      <p class="helper"><span class="emoji">🔍</span> Escribe un modelo para comenzar la búsqueda.</p>
     </div>
   </div>
 
   <script>
-    // --- CONFIGURACIÓN ---
-    // La URL de tu archivo JSON con los precios
+    // ---------- CONFIGURACIÓN ----------
     const PRICES_JSON_URL = 'prices.json';
 
-    // --- ELEMENTOS DEL DOM ---
+    // ---------- ALIAS PARA NORMALIZAR BÚSQUEDAS ----------
+    const ALIAS_MAP = {
+      'redmi': 'xiaomi',
+      'galaxy': 'samsung',
+      'moto': 'motorola',
+      'huawei': 'huawei',
+      'honor': 'honor',
+      'xiaomi': 'xiaomi',
+      'samsung': 'samsung',
+      'motorola': 'motorola'
+    };
+
+    // ---------- ELEMENTOS DOM ----------
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
     const resultsContainer = document.getElementById('results');
 
-    // --- VARIABLE GLOBAL PARA LOS DATOS ---
+    // ---------- VARIABLE GLOBAL ----------
     let pricesData = [];
 
-    // --- 1. CARGAR LOS DATOS ---
+    // ---------- FUNCIÓN PARA NORMALIZAR LA CONSULTA ----------
+    function normalizeQuery(query) {
+      let q = query.toLowerCase().trim();
+      // Dividir por espacios
+      const words = q.split(/\s+/);
+      if (words.length > 0) {
+        const firstWord = words[0];
+        // Si la primera palabra es un alias conocido, reemplazarla por la marca oficial
+        if (ALIAS_MAP[firstWord]) {
+          words[0] = ALIAS_MAP[firstWord];
+          q = words.join(' ');
+        }
+      }
+      return q;
+    }
+
+    // ---------- CARGAR DATOS DESDE JSON ----------
     async function loadPrices() {
       try {
-        // Añadimos un parámetro 't' para evitar la caché del navegador
+        // Añadir timestamp para evitar caché
         const url = PRICES_JSON_URL + '?t=' + new Date().getTime();
         const response = await fetch(url);
         if (!response.ok) throw new Error('No se pudo cargar la lista de precios.');
-        pricesData = await response.json();
-        // Mostrar un mensaje de éxito o simplemente preparar la interfaz
-        resultsContainer.innerHTML = `<p class="helper">✅ Listo. Busca el modelo de tu celular.</p>`;
+        const data = await response.json();
+        // Crear campo 'searchable' con marca + modelo en minúsculas
+        pricesData = data.map(item => ({
+          ...item,
+          searchable: (item.marca + ' ' + item.modelo).toLowerCase()
+        }));
+        resultsContainer.innerHTML = `<p class="helper"><span class="emoji">✅</span> Listo. Busca el modelo de tu celular.</p>`;
       } catch (error) {
         console.error('Error al cargar precios:', error);
         resultsContainer.innerHTML = `<p class="helper" style="color: #ff1744;">❌ Error al cargar los precios. Intenta de nuevo más tarde.</p>`;
       }
     }
 
-    // --- 2. FUNCIÓN DE BÚSQUEDA ---
+    // ---------- FUNCIÓN DE BÚSQUEDA ----------
     function performSearch() {
-      const query = searchInput.value.trim().toLowerCase();
-      // Si la consulta está vacía, mostramos un mensaje y no hacemos nada
+      const query = searchInput.value.trim();
       if (!query) {
-        resultsContainer.innerHTML = `<p class="helper">🔍 Escribe un modelo para comenzar la búsqueda.</p>`;
+        resultsContainer.innerHTML = `<p class="helper"><span class="emoji">🔍</span> Escribe un modelo para comenzar la búsqueda.</p>`;
         return;
       }
 
-      // Buscar en los datos (filtro insensible a mayúsculas/minúsculas)
+      const normalizedQuery = normalizeQuery(query);
+
+      // Buscar en el campo 'searchable' (marca + modelo)
       const results = pricesData.filter(item =>
-        item.modelo.toLowerCase().includes(query) ||
-        item.marca.toLowerCase().includes(query)
+        item.searchable.includes(normalizedQuery)
       );
 
-      // --- 3. MOSTRAR LOS RESULTADOS ---
       if (results.length === 0) {
-        resultsContainer.innerHTML = `<div class="no-results">😕 No encontramos pantallas para "<strong>${searchInput.value}</strong>". Prueba con otro modelo.</div>`;
+        resultsContainer.innerHTML = `
+          <div class="no-results">
+            😕 No encontramos pantallas para "<strong>${searchInput.value}</strong>".<br/>
+            <span style="font-size:0.9rem; color:#6a7a88;">Prueba con otro modelo o revisa la ortografía.</span>
+          </div>
+        `;
         return;
       }
 
-      // Generar el HTML para cada resultado
+      // Ordenar resultados (opcional: por precio ascendente)
+      results.sort((a, b) => a.precio - b.precio);
+
       let html = '';
       results.forEach(item => {
         html += `
@@ -180,114 +280,14 @@
       resultsContainer.innerHTML = html;
     }
 
-    // --- 4. EVENTOS Y CARGA INICIAL ---
+    // ---------- EVENTOS ----------
     searchBtn.addEventListener('click', performSearch);
     searchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') performSearch();
     });
 
-    // Cargar los datos al iniciar la página
+    // ---------- INICIALIZAR ----------
     loadPrices();
-    // --- CONFIGURACIÓN ---
-const PRICES_JSON_URL = 'prices.json';
-
-// --- ALIAS PARA NORMALIZAR BÚSQUEDAS ---
-const ALIAS_MAP = {
-  'redmi': 'xiaomi',
-  'galaxy': 'samsung',
-  'moto': 'motorola',
-  'huawei': 'huawei', // ya está
-  'honor': 'honor',
-  'xiaomi': 'xiaomi',
-  'samsung': 'samsung',
-  'motorola': 'motorola'
-};
-
-// --- ELEMENTOS DOM ---
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const resultsContainer = document.getElementById('results');
-
-let pricesData = [];
-
-// --- NORMALIZAR CONSULTA ---
-function normalizeQuery(query) {
-  let q = query.toLowerCase().trim();
-  // Reemplazar alias por marca oficial
-  const words = q.split(/\s+/);
-  if (words.length > 0) {
-    const firstWord = words[0];
-    if (ALIAS_MAP[firstWord]) {
-      words[0] = ALIAS_MAP[firstWord];
-      q = words.join(' ');
-    }
-  }
-  return q;
-}
-
-// --- CARGAR DATOS ---
-async function loadPrices() {
-  try {
-    const url = PRICES_JSON_URL + '?t=' + new Date().getTime();
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('No se pudo cargar la lista de precios.');
-    pricesData = await response.json();
-    // Agregar campo 'searchable' a cada item (marca + modelo en minúsculas)
-    pricesData = pricesData.map(item => ({
-      ...item,
-      searchable: (item.marca + ' ' + item.modelo).toLowerCase()
-    }));
-    resultsContainer.innerHTML = `<p class="helper">✅ Listo. Busca el modelo de tu celular.</p>`;
-  } catch (error) {
-    console.error('Error al cargar precios:', error);
-    resultsContainer.innerHTML = `<p class="helper" style="color: #ff1744;">❌ Error al cargar los precios. Intenta de nuevo más tarde.</p>`;
-  }
-}
-
-// --- BÚSQUEDA ---
-function performSearch() {
-  const query = searchInput.value.trim();
-  if (!query) {
-    resultsContainer.innerHTML = `<p class="helper">🔍 Escribe un modelo para comenzar la búsqueda.</p>`;
-    return;
-  }
-
-  const normalizedQuery = normalizeQuery(query);
-
-  // Filtrar: buscar en el campo 'searchable'
-  const results = pricesData.filter(item =>
-    item.searchable.includes(normalizedQuery)
-  );
-
-  if (results.length === 0) {
-    resultsContainer.innerHTML = `<div class="no-results">😕 No encontramos pantallas para "<strong>${searchInput.value}</strong>". Prueba con otro modelo.</div>`;
-    return;
-  }
-
-  let html = '';
-  results.forEach(item => {
-    html += `
-      <div class="result-item">
-        <div class="info">
-          <span class="modelo">${item.marca} ${item.modelo}</span>
-          <span class="calidad">Calidad: ${item.calidad}</span>
-        </div>
-        <span class="precio">₡${item.precio.toLocaleString('es-CR')}</span>
-      </div>
-    `;
-  });
-
-  resultsContainer.innerHTML = html;
-}
-
-// --- EVENTOS ---
-searchBtn.addEventListener('click', performSearch);
-searchInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') performSearch();
-});
-
-// Carga inicial
-loadPrices();
   </script>
 </body>
 </html>

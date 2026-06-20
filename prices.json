@@ -142,6 +142,8 @@
   {"marca":"Redmi","modelo":"15C","calidad":"LCD","precio":22000},
   {"marca":"Redmi","modelo":"9","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"9s","calidad":"LCD","precio":20000},
+  {"marca":"Redmi","modelo":"Note 13 pro","calidad":"Genérica","precio":22000},
+  {"marca":"Redmi","modelo":"Note 14 pro 5G","calidad":"LCD","precio":30000},
   {"marca":"Redmi","modelo":"Note 14 4g","calidad":"Genérica","precio":20000},
   {"marca":"Redmi","modelo":"Note 11","calidad":"OLED","precio":35000},
   {"marca":"Redmi","modelo":"Note 11s","calidad":"OLED","precio":35000},

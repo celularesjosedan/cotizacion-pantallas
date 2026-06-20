@@ -131,7 +131,6 @@
   {"marca":"Redmi","modelo":"MI A2","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"14C","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"13C","calidad":"LCD","precio":20000},
-  {"marca":"Redmi","modelo":"14C","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"9","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"9s","calidad":"LCD","precio":20000},
   {"marca":"Redmi","modelo":"Note 14 4g","calidad":"Genérica","precio":20000},
@@ -145,6 +144,6 @@
   {"marca":"Poco","modelo":"M4 pro","calidad":"OLED","precio":35000},
   {"marca":"Poco","modelo":"X5 pro","calidad":"OLED","precio":45000},
   {"marca":"Poco","modelo":"X5","calidad":"OLED","precio":35000},
-  {"marca":"Poco,"modelo":"M4 pro 5g","calidad":"LCD","precio":22000},
+  {"marca":"Poco","modelo":"M4 pro 5g","calidad":"LCD","precio":22000},
   {"marca":"Redmi","modelo":"Note 12 4g","calidad":"OLED","precio":45000}
 ]

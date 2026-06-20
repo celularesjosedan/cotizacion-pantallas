@@ -44,7 +44,7 @@
   {"marca":"Samsung","modelo":"A32","calidad":"OLED","precio":32000},
   {"marca":"Samsung","modelo":"A34","calidad":"ORIGINAL","precio":70000},
   {"marca":"Samsung","modelo":"A52s","calidad":"OLED","precio":45000},
-  {"marca":"Samsung","modelo":"A24","calidad":"Genérica","precio":45000},
+  {"marca":"Samsung","modelo":"A24","calidad":"OLED","precio":45000},
   {"marca":"Samsung","modelo":"A52","calidad":"OLED","precio":40000},
   {"marca":"Samsung","modelo":"A22 4G","calidad":"OLED","precio":35000},
   {"marca":"Samsung","modelo":"A53","calidad":"OLED","precio":40000},

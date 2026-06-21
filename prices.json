@@ -152,6 +152,8 @@
   {"marca":"Redmi","modelo":"Note 10 pro","calidad":"OLED","precio":35000},
   {"marca":"Redmi","modelo":"Note 14 4g","calidad":"OLED","precio":45000},
   {"marca":"Poco","modelo":"X4 pro","calidad":"OLED","precio":45000},
+  {"marca":"Poco","modelo":"Note 14 pro 5G","calidad":"ORIGINAL","precio":45000},
+  {"marca":"Poco","modelo":"Note 14 pro 4G","calidad":"ORIGINAL","precio":60000},
   {"marca":"Poco","modelo":"M4 pro","calidad":"OLED","precio":35000},
   {"marca":"Poco","modelo":"X5 pro","calidad":"OLED","precio":45000},
   {"marca":"Poco","modelo":"X5","calidad":"OLED","precio":35000},
